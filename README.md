@@ -1,6 +1,6 @@
-Fucking If Case Let Syntax
+Fucking Multiple Trailing Closure Syntax
 =================
 
 Because syntax is hard.
 
-http://fuckingifcaseletsyntax.com
+http://fuckingmultipletrailingclosuresyntax.com
