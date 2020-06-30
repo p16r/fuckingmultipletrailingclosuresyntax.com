@@ -1,208 +1,426 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>How Do I Write If Case Let in Swift?</title>
-    <style>
-    body {
-      background-color: #30303A;
-      color: #fff;
-      font-family: Helvetica Neue, sans-serif;
-      font-size: 20px;
-      padding: 40px;
-      padding-bottom: 0;
-    }
+    <head>
+        <title>How Do I Write Multiple Trailing Closures in Swift?</title>
+        <style>
 
-    strong {
-      color: #B68DE0;
-    }
+            body {
+                background-color: #0F0F0F;
+                color: #FFFFFF;
+                font-family: system-ui, sans-serif;
+                font-size: 20px;
+                padding: 5em 2em;
+                max-width: 800px;
+                margin: auto;
+            }
 
-    h1 {
-      font-size: 40px;
-      margin-bottom: 1.5em;
-      text-align: center;
-    }
+            body > div {
+                margin: 3.2em 0;
+            }
 
-    h2 {
-      font-weight: normal;
-    }
+            body > div:last-child, body > div:last-child p:last-child {
+                margin-bottom: 0;
+            }
 
-    .let {
-      color: #B68DE0;
-    }
+            h1 {
+                font-size: 2em;
+                margin: 0 0 2em 0;
+                text-align: center;
+            }
 
-    .expression {
-      color: #F9DF4A;
-    }
+            h2 {
+                font-size: 1.5em;
+                font-weight: normal;
+            }
 
-    .pattern {
-      color: #1FDDBA;
-    }
-    
-    .comment {
-	  color: #959292;
-    }
+            h3 {
+                font-size: 1.2em;
+                font-weight: normal;
+                margin: 0;
+            }
 
-    .disclaimer {
-      line-height: 2em;
-      padding-bottom: 2em;
-    }
+            p {
+                margin: 1em 0;
+            }
 
-    div p.disclaimer {
-        padding-left: 2em;
-    }
+            a {
+                color: #5482FF;
+                text-decoration: none;
+            }
 
-    code {
-      display: block;
-      font-family: Menlo, monaco, monospace;
-      font-size: 20px;
-      margin-bottom: 3em;
-      margin-left: 40px;
-      margin-top: 1.5em;
-    }
+            strong {
+                color: #FEC502;
+            }
 
-    .inline-code {
-        font-family: Menlo, monaco, monospace;
-        color: #B68DE0;
-    }
+            code {
+                display: inline-block;
+                background: #1F2029;
+                font-family: Menlo, monaco, monospace;
+                font-size: 0.9em;
+                padding: 0 4px;
+                border-radius: 4px;
+                white-space: pre;
+            }
 
-    footer {
-      font-size: 12px;
-      margin-top: 200px;
-      opacity: 0.4;
-      text-align: right;
-    }
+            code.block {
+                display: block;
+                line-height: 1.5;
+                overflow-x: scroll;
+                padding: 1em;
+                border-radius: 1em;
+                margin: 2em 0;
+            }
 
-    a {
-      color: #B68DE0;
-      text-decoration: none;
-    }
+            code span.keyword {
+                font-weight: 700;
+                color: #D7008F;
+            }
 
-    </style>
-    <style media='print'>
-    body {
-      background-color: #FFFFFF;
-      font-size: 16px;
-      padding: 20px;
-    }
+            code span.type {
+                color: #1DA9A2;
+            }
 
-    h1 {
-      font-size: 28px;
-      margin-bottom: 1em;
-    }
+            code span.call {
+                color: #25908D;
+            }
 
-    code {
-      font-size: 16px;
-      margin-bottom: 2em;
-      margin-left: 20px;
-    }
+            code span.property {
+                color: #25908D;
+            }
 
-    footer {
-      font-size: 10px;
-      margin-top: 40px;
-    }
-    </style>
-    <link href="apple-touch-icon-57x57.png" rel="apple-touch-icon" sizes="57x57">
-    <link href="apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
-    <link href="apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
-    <link href="apple-touch-icon-144x144.png" rel="apple-touch-icon" sizes="144x144">
-    <link href="apple-touch-icon-60x60.png" rel="apple-touch-icon" sizes="60x60">
-    <link href="apple-touch-icon-120x120.png" rel="apple-touch-icon" sizes="120x120">
-    <link href="apple-touch-icon-76x76.png" rel="apple-touch-icon" sizes="76x76">
-    <link href="apple-touch-icon-152x152.png" rel="apple-touch-icon" sizes="152x152">
-    <link href="favicon-196x196.png" rel="icon" sizes="196x196" type="image/png">
-    <link href="favicon-160x160.png" rel="icon" sizes="160x160" type="image/png">
-    <link href="favicon-96x96.png" rel="icon" sizes="96x96" type="image/png">
-    <link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
-    <link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
-    <meta content="Pattern matching syntax" name="apple-mobile-web-app-title">
-    <base target="_top">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-9504319-6"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+            code span.number {
+                color: #149C92;
+            }
 
-      gtag('config', 'UA-9504319-6');
-    </script>
-</head>
-<body>
-    <style>
-    #forkongithub a{background:#AA3333;color:#fff;text-decoration:none;font-family:Helvetica Neue,sans-serif;text-align:center;font-weight:bold;padding:5px 40px;font-size:1rem;line-height:2rem;position:relative;transition:0.5s;}#forkongithub a:hover{background:#c11;color:#fff;}#forkongithub a::before,#forkongithub a::after{content:"";width:100%;display:block;position:absolute;top:1px;left:0;height:1px;background:#fff;}#forkongithub a::after{bottom:1px;top:auto;}@media screen and (min-width:800px){#forkongithub{position:absolute;display:block;top:0;right:0;width:200px;overflow:hidden;height:200px;z-index:9999;}#forkongithub a{width:200px;position:absolute;top:60px;right:-60px;transform:rotate(45deg);-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);box-shadow:4px 4px 10px rgba(0,0,0,0.3);}}
-    </style><span id="forkongithub"><a href="https://github.com/zoejessica/fuckingifcaseletsyntax.com">Fork me on GitHub</a></span><br>
-    <br>
-    <h1>How Do I Write If Case Let in Swift?</h1>
-    <div>
-        <h2><strong>if case let</strong> is an abbreviated form of <strong>switch</strong></h2>
-        <p class='disclaimer'><span class='inline-code'>case let</span> immediately precedes the <span class='pattern'>candidate pattern</span> in both versions. However, when using <span class='inline-code'>if case let</span> the <span class='expression'>value</span> comes after the = operator:</p>
-        <code>if case let <span class='pattern'>Puppy.mastiff(droolRating, weight)</span> = <span class='expression'>fido</span> {<br/>
-        <span class='comment'>...  // tell fido he's a good boy</span><br/>
-        </code><p class='disclaimer'>is equivalent to: </p><code>
-        switch <span class='expression'>fido</span> {<br/>
+            code span.string {
+                color: #D3232E;
+            }
 
-        case let <span class='pattern'>Puppy.mastiff(droolRating, weight)</span>:<br/>
-        <span class='comment'>... // tell fido he's a good boy</span><br/>
-        </code>
-    </div>
+            code span.comment {
+                color: #45BB3E;
+            }
+
+            code span.dotAccess {
+                color: #BED800;
+            }
+
+            code span.preprocessing {
+                font-weight: 700;
+                color: #C77A4B;
+            }
+
+            code span.editor-placeholder {
+                background: #87878A;
+                border-radius: 0.25em;
+            }
+
+        </style>
+        <style media="print">
+            body {
+                background-color: #FFFFFF;
+                font-size: 16px;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 32px;
+                margin-bottom: 1em;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            code {
+                font-size: 16px;
+                margin-bottom: 2em;
+                margin-left: 20px;
+            }
+
+            footer {
+                font-size: 10px;
+                margin-top: 40px;
+            }
+        </style>
+        <link href="apple-touch-icon-57x57.png" rel="apple-touch-icon" sizes="57x57">
+        <link href="apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+        <link href="apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
+        <link href="apple-touch-icon-144x144.png" rel="apple-touch-icon" sizes="144x144">
+        <link href="apple-touch-icon-60x60.png" rel="apple-touch-icon" sizes="60x60">
+        <link href="apple-touch-icon-120x120.png" rel="apple-touch-icon" sizes="120x120">
+        <link href="apple-touch-icon-76x76.png" rel="apple-touch-icon" sizes="76x76">
+        <link href="apple-touch-icon-152x152.png" rel="apple-touch-icon" sizes="152x152">
+        <link href="favicon-196x196.png" rel="icon" sizes="196x196" type="image/png">
+        <link href="favicon-160x160.png" rel="icon" sizes="160x160" type="image/png">
+        <link href="favicon-96x96.png" rel="icon" sizes="96x96" type="image/png">
+        <link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
+        <link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
+        <meta content="Pattern matching syntax" name="apple-mobile-web-app-title">
+        <base target="_top">
+    </head>
+    <body>
+        <style>
+
+            #fork-me {
+                position: absolute;
+                display: block;
+                top: 0;
+                right: 0;
+                width: 200px;
+                overflow: hidden;
+                height: 200px;
+                z-index: 9999;
+            }
+
+            #fork-me a {
+                background: #853835;
+                color: #FFFFFF;
+                text-decoration: none;
+                text-align: center;
+                font-size: 0.8em;
+                font-weight: bold;
+                padding: 0 1em;
+                line-height: 2em;
+                width: 200px;
+                position: absolute;
+                top: 50px;
+                right: -50px;
+                transform: rotate(45deg);
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                -moz-transform: rotate(45deg);
+                -o-transform: rotate(45deg);
+            }
+
+            #fork-me a::before, #fork-me a::after {
+                content: "";
+                width: 100%;
+                display: block;
+                position: absolute;
+                top: 1px;
+                left: 0;
+                height: 1px;
+                background: #FFFFFF;
+            }
+
+            #fork-me a::after {
+                bottom: 1px;
+                top: auto;
+            }
+
+        </style>
+        <span id="fork-me"><a href="https://github.com/prtmshk/fuckingmultipletrailingclosuresyntax.com" target="_blank">Fork me on GitHub</a></span>
+        <h1>How Do I Write Multiple Trailing Closures in Swift?</h1>
         <div>
-        <h2><strong>let</strong> binds associated values</h2>
-        <p class='disclaimer'><span class='inline-code'>case let </span>is a shortcut so all subsequent associated values can be bound just by providing variable names. Alternatively write <span class='inline-code'>let</span> as usual, before each name:</p>
-        <code>if case <span class='pattern'>Puppy.mastiff(<span class='let'>let</span> droolRating, <span class='let'>let</span> weight)</span> = <span class='expression'>fido</span> {<br/>
-        <span class='comment'>...  // does that pup need an extra treat?</span>
-        </code>
-        <p class='disclaimer'>Bind a tuple with all the values at once:</p>
-         <code>if case <span class='let'>let</span> <span class='pattern'>Puppy.mastiff(characteristics)</span> = <span class='expression'>fido</span> {<br/>
-        <span class='comment'>...  // how cute is this doggie, exactly?</span><br/>
-        </code>
-        <p class='disclaimer'>Remember the syntactic sugar to match non-nil optionals:</p>
-         <code>if case <span class='let'>let</class> <span class='pattern'>Puppy.mastiff(droolFactor, weight)?</span> = <span class='expression'>potentialPup</span> {<br/>
-        <span class='comment'>...  // oh thank goodness, a puppy</span><br/>
-        </code>
-        <p class='disclaimer'>Omit <span class='let'>let</span> entirely if you don't need the associated values:</p>
-         <code>if case <span class='pattern'>Puppy.mastiff</span> = <span class='expression'>fido</span> {<br/>
-        <span class='comment'>...  // just hand me the pupster</span><br/>
-        </code>
-    </div>
-    <div>
-        <h2>Add conditions to <strong>if</strong> and <strong>guard</strong> using commas</h2>       
-        <code>if case let <span class='pattern'>Puppy.mastiff(droolRating, _)</span> = <span class='expression'>fido</span>, droolRating > 8 {<br/>
-        <span class='comment'>...  // you're going to need a new couch</span><br/>
-        </code>
-           
-        <code>guard case let <span class='pattern'>Puppy.mastiff(droolRating, _)</span> = <span class='expression'>fido</span>, droolRating < 10 else {<br/>
-        <span class='comment'>...  // that dog is not coming in the house</span><br/>
-        </code>
-    </div>
-    <div>
-    <h2>Iterate using <strong>for</strong>, <strong>where</strong> and logical operators</h2>       
-    <code>for case let <span class='pattern'>Puppy.mastiff(droolRating, weight)</span> in <span class='expression'>rescuePups</span> where droolRating > 5 && weight > 15.0 {<br/>
-    <span class='comment'>...  // I'll take the chubby, soggy ones please</span><br/>
-    </code>
-</div>
+            <p>This article presumes you already know <a href="https://fuckingclosuresyntax.com" target="_blank">fucking closure syntax</a>.</p>
+        </div>
+        <div>
+            <h2 id="functions-with-multiple-trailing-closure-parameters">
+                <a href="#functions-with-multiple-trailing-closure-parameters">
+                    Functions with multiple trailing closure parameters
+                </a>
+            </h2>
+            <p>Use standard Swift syntax to declare parameters of closure types:</p>
+<code class="block"><span class="keyword">func</span> example1(
+    value: <span class="type">Int</span>,
+    closure1: (<span class="type">Int</span>) -> <span class="type">String</span>,
+    closure2: (<span class="type">String</span>) -> <span class="type">Bool</span>,
+    closure3: (<span class="type">Bool</span>) -> <span class="type">Int</span>
+) -> <span class="type">Int</span> {
+    <span class="keyword">let</span> value1 = <span class="call">closure1</span>(value)
+    <span class="keyword">let</span> value2 = <span class="call">closure2</span>(value1)
+    <span class="keyword">let</span> value3 = <span class="call">closure3</span>(value2)
+    <span class="keyword">return</span> value3
+}</code>
+            <p>Swift versions 5.2 and earlier would let you “pop” only the last closure out of the function call parenthesis while all closures before it remained inside.</p>
+<code class="block"><span class="comment">//  Swift 5.2 and before:</span>
+<span class="keyword">let</span> value = <span class="call">example1</span>(
+    value: <span class="number">420</span>,
+    closure1: { number <span class="keyword">in</span>
+        <span class="type">String</span>(describing: number)
+    },
+    closure2: { string <span class="keyword">in</span>
+        string.<span class="property">count</span>.<span class="call">isMultiple</span>(of: <span class="number">69</span>)
+    }
+) { boolean <span class="keyword">in</span>
+    boolean ? <span class="number">1</span> : <span class="number">0</span>
+}</code>
+            <p>New in Swift 5.3 and later, you can “pop” <strong>all</strong> the trailing closures outside the closing parenthesis of the function call:</p>
+<code class="block"><span class="comment">//  Swift 5.3 and after:</span>
+<span class="keyword">let</span> value = <span class="call">example1</span>(value: <span class="number">420</span>) { number <span class="keyword">in</span>
+    <span class="type">String</span>(describing: number)
+} closure2: { string <span class="keyword">in</span>
+    string.<span class="property">count</span>.<span class="call">isMultiple</span>(of: <span class="number">69</span>)
+} closure3: { boolean <span class="keyword">in</span>
+    boolean ? <span class="number">1</span> : <span class="number">0</span>
+}</code>
+            <p>The rules for closure labelling are:</p>
+            <ul>
+                <li>Label of the first trailing closure is omitted.</li>
+                <li>Labels of subsequent closures are required.</li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="functions-with-omitted-argument-labels">
+                <a href="#functions-with-omitted-argument-labels">
+                    Functions with omitted argument labels
+                </a>
+            </h2>
+            <p>You may omit the argument label while declaring a function:</p>
+<code class="block"><span class="keyword">func</span> example2(
+    <span class="keyword">_</span> value: <span class="type">Int</span>,
+    <span class="keyword">_</span> closure1: (<span class="type">Int</span>) -> <span class="type">String</span>,
+    <span class="keyword">_</span> closure2: (<span class="type">String</span>) -> <span class="type">Bool</span>,
+    <span class="keyword">_</span> closure3: (<span class="type">Bool</span>) -> <span class="type">Int</span>
+) -> <span class="type">Int</span> {
+    <span class="keyword">let</span> value1 = <span class="call">closure1</span>(value)
+    <span class="keyword">let</span> value2 = <span class="call">closure2</span>(value1)
+    <span class="keyword">let</span> value3 = <span class="call">closure3</span>(value2)
+    <span class="keyword">return</span> value3
+}</code>
+            <p>In Swift 5.2 and earlier, you would use the function with no argument labels:</p>
+<code class="block"><span class="comment">//  Swift 5.2 and before:</span>
+<span class="keyword">let</span> value = <span class="call">example2</span>(
+    <span class="number">420</span>,
+    { number <span class="keyword">in</span>
+        <span class="type">String</span>(describing: number)
+    }, { string <span class="keyword">in</span>
+        string.<span class="property">count</span>.<span class="call">isMultiple</span>(of: <span class="number">69</span>)
+    }
+) { boolean <span class="keyword">in</span>
+    boolean ? <span class="number">1</span> : <span class="number">0</span>
+}</code>
+            <p>While using the new syntax in Swift 5.3 and after, you <strong>must</strong> use <code><span class="keyword">_</span>: </code> to label closures that were previously unlabelled.</p>
+<code class="block"><span class="comment">//  Swift 5.3 and after:</span>
+<span class="keyword">let</span> value = <span class="call">example2</span>(<span class="number">420</span>) { number <span class="keyword">in</span>
+    <span class="type">String</span>(describing: number)
+} <span class="keyword">_</span>: { string <span class="keyword">in</span>
+    string.<span class="property">count</span>.<span class="call">isMultiple</span>(of: <span class="number">69</span>)
+} <span class="keyword">_</span>: { boolean <span class="keyword">in</span>
+    boolean ? <span class="number">1</span> : <span class="number">0</span>
+}</code>
+        </div>
+        <div>
+            <h2 id="functions-with-only-closures-for-parameters">
+                <a href="#functions-with-only-closures-for-parameters">
+                    Functions with only closures for parameters
+                </a>
+            </h2>
+            <p>Declaration works exactly as above:</p>
+<code class="block"><span class="keyword">func</span> example3(closure1: () -> <span class="type">Int</span>, closure2: (<span class="type">Int</span>) -> <span class="type">Bool</span>) -> <span class="type">Bool</span> {
+    <span class="keyword">let</span> value1 = <span class="call">closure1</span>()
+    <span class="keyword">let</span> value2 = <span class="call">closure2</span>(value1)
+    <span class="keyword">return</span> value2
+}</code>
+            <p>While using, you can omit the function parentheses and get straight to the closures:</p>
+<code class="block"><span class="keyword">let</span> value = <span class="call">example3</span> { <span class="number">420</span> } closure2: { number <span class="keyword">in</span>
+    number.<span class="call">isMultiple</span>(of: <span class="number">69</span>)
+}</code>
+        </div>
+        <div>
+            <h2 id="multiple-trailing-closures-in-subscripts">
+                <a href="#multiple-trailing-closures-in-subscripts">
+                    Multiple trailing closures in subscripts
+                </a>
+            </h2>
+            <p>This syntax carries over into subscript declaration…</p>
+<code class="block"><span class="keyword">struct</span> Example {
 
-    <div>
-      <h2>Bind non-optional derived values in chained expressions</h2>
-      <code>
-        if let rescueCenter = <span class='expression'>nearest()</span>, case let <span class='pattern'>puppies</span> = <span class='expression'>rescueCenter.puppies</span>, puppies.count < 10 {<br/>
-        <span class='comment'>... // better hurry or might not get enough</span><br/>
-      </code>
-    </div>
+    <span class="keyword">private let</span> array: [<span class="type">Int</span>]
 
-        <p>Other more in-depth articles:
-	        <li><a href='https://appventure.me/2015/08/20/swift-pattern-matching-in-detail/'>Swift Pattern Matching In Detail - Benedikt Terhechte</a></li>
-	        <li><a href='https://oleb.net/blog/2015/09/swift-pattern-matching/'>Pattern Matching In Swift - Ole Begemann</a></li>
-	        <li><a href='http://alisoftware.github.io/swift/pattern-matching/2016/05/16/pattern-matching-4/'>Pattern Matching - Crunchy Development</a></li>
-		<li><a href='https://www.bignerdranch.com/blog/pro-pattern-matching-in-swift/'>Pro Pattern-Matching in Swift - Nick Teissler, Big Nerd Ranch</a></li>              
-		<li><a href='https://www.objc.io/blog/2018/09/04/switching-with-associated-values/'</a>Using the power of switching with associated values to write elegant, logical, meaningful code - objc.io</a></li> </p>
-	<br>
-        <br>
-        Unable to access this site due to the profanity in the URL? <strong><a href="http://goshdarnifcaseletsyntax.com">http://goshdarnifcaseletsyntax.com</a></strong> is a more work-friendly mirror.
-        <br>
-        
-        
-    </div>
-    <footer>
-        By <a href="http://twitter.com/zoejessica">Zoe Smith</a>, with many thanks to <a href="http://zeveisenberg.com">Zev Eisenberg</a> and <a href="http://lazerwalker.com/">Em Lazer-Walker</a>.
-    </footer>
-</body>
+    <span class="keyword">init</span>(array: [<span class="type">Int</span>]) {
+        <span class="keyword">self</span>.<span class="property">array</span> = array
+    }
+
+    <span class="keyword">subscript</span>(
+        index: <span class="type">Int</span>,
+        closure1: (<span class="type">Int</span>) -> <span class="type">Int</span>,
+        closure2: (<span class="type">Int</span>) -> <span class="type">Int</span>
+    ) -> <span class="type">Int</span> {
+        <span class="keyword">let</span> index1 = <span class="call">closure1</span>(index)
+        <span class="keyword">let</span> index2 = <span class="call">closure2</span>(index1)
+        <span class="keyword">return</span> array[index2]
+    }
+
+    <span class="keyword">subscript</span>(closure1: () -> <span class="type">Int</span>, closure2: (<span class="type">Int</span>) -> <span class="type">Int</span>) -> <span class="type">Int</span> {
+        <span class="keyword">let</span> index1 = <span class="call">closure1</span>()
+        <span class="keyword">let</span> index2 = <span class="call">closure2</span>(index1)
+        <span class="keyword">return</span> array[index2]
+    }
+
+}</code>
+            <p>… and usage:</p>
+<code class="block"><span class="keyword">let</span> example = <span class="type">Example</span>(array: [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])
+<span class="keyword">let</span> value1 = example[<span class="number">1</span>] { $0 * $0 } <span class="keyword">_</span>: { $0 + $0 }
+<span class="keyword">let</span> value2 = example[] { <span class="number">2</span> } <span class="keyword">_</span>: { $0 * $0 }</code>
+            <p>Unlike function parenthesis, the brackets that denote subscript access <strong>cannot be omitted</strong>.</p>
+            <p>If an external argument label is not provided explicitly, subscript calls will use <code><span class="keyword">_</span>: </code> instead of the parameter name. This applies to subscript calls in general, not just this specific case.</p>
+            <p>Provide an explicit external argument label…</p>
+<code class="block"><span class="keyword">extension</span> <span class="type">Example</span> {
+
+    <span class="keyword">subscript</span>(
+        index index: <span class="type">Int</span>,
+        transform1 closure1: (<span class="type">Int</span>) -> <span class="type">Int</span>,
+        transform2 closure2: (<span class="type">Int</span>) -> <span class="type">Int</span>
+    ) -> <span class="type">Int</span> {
+        <span class="keyword">let</span> index1 = <span class="call">closure1</span>(index)
+        <span class="keyword">let</span> index2 = <span class="call">closure2</span>(index1)
+        <span class="keyword">return</span> array[index2]
+    }
+
+}</code>
+            <p>… to use labelled arguments at your call site. As usual, the label of the first trailing closure is ommitted:</p>
+<code class="block"><span class="keyword">let</span> value3 = example[index: <span class="number">3</span>] { $0 + <span class="number">2</span> } transform2: { $0 - <span class="number">2</span> }</code>
+        </div>
+        <div>
+            <h2 id="closures-and-trailing-closures">
+                <a href="#closures-and-trailing-closures">
+                    Closures and trailing closures
+                </a>
+            </h2>
+            <p>It is possible to declare closures that take multiple trailing closure parameters:</p>
+<code class="block"><span class="keyword">let</span> example: (<span class="type">Int</span>, (<span class="type">Int</span>) -> <span class="type">Int</span>, (<span class="type">Int</span>) -> <span class="type">Int</span>, (<span class="type">Int</span>) -> <span class="type">Int</span>) -> <span class="type">Int</span> = {
+    value, closure1, closure2, closure3 <span class="keyword">in
+    let</span> value1 = <span class="call">closure1</span>(value)
+    <span class="keyword">let</span> value2 = <span class="call">closure2</span>(value1)
+    <span class="keyword">let</span> value3 = <span class="call">closure3</span>(value2)
+    <span class="keyword">return</span> value3
+}</code>
+            <p>While using this closure, the first trailing closure argument label is omitted, while subsequent closures <strong>must</strong> be labelled with <code><span class="keyword">_</span>: </code> as closures do not have labelled arguments:</p>
+<code class="block"><span class="keyword">let</span> value = <span class="call">example</span>(<span class="number">42</span>) { $0 + <span class="number">2</span> } <code><span class="keyword">_</span></code>: { $0 * $0 } <code><span class="keyword">_</span>: { -$0 }</code></code>
+        </div>
+        <div>
+            <h2 id="default-arguments-and-trailing-closures">
+                <a href="#default-arguments-and-trailing-closures">
+                    Default arguments and trailing closures
+                </a>
+            </h2>
+            <p>The behaviour for handling default arguments is unchanged. Consider the function:</p>
+<code class="block"><span class="keyword">func</span> example4(closure: () -> <span class="type">Int</span> = { <span class="number">69</span> }, any: <span class="type">Any</span>? = <span class="keyword">nil</span>) {
+    <span class="call">print</span>(<span class="call">closure</span>())
+    <span class="call">print</span>(any == <span class="keyword">nil</span>)
+}</code>
+            <p>Invoking it like this:</p>
+<code class="block"><span class="call">example4</span> { <span class="number">420</span> }</code>
+            <p>Is the same as:</p>
+<code class="block"><span class="call">example4</span>(any: { <span class="number">420</span> })</code>
+            <p>Although the provided trailing closure matches the type of the <code>closure: </code> parameter, existing trailing closure behaviour matches the closure to <code>any: </code>.</p>
+        </div>
+        <div>
+            <h2 id="see-also"><a href="#see-also">See also:</a></h2>
+            <ul>
+                <li><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0279-multiple-trailing-closures.md" target="_blank">Swift Evolution SE-0279: Multiple Trailing Closures</a></li>
+                <li><a href="https://www.whatsnewinswift.com/?from=5.2&to=5.3#multiple-trailing-closures" target="_blank">What's new in Swift? Multiple Trailing Closures</a></li>
+            </ul>
+        </div>
+        <div>
+            <p>Unable to access this site due to the profanity in the URL? <strong><a href="https://goshdarnmultipletrailingclosuresyntax.com" target="_blank">goshdarnmultipletrailingclosuresyntax.com</a></strong> is a more work-friendly mirror.</p>
+        </div>
+        <div>
+            <p>By <a href="http://twitter.com/prtmshk" target="_blank">Prathamesh Kowarkar</a>.<br></p>
+            <p>With many thanks to <a href="http://twitter.com/zoejessica" target="_blank">Zoë Smith</a>, <a href="http://zeveisenberg.com" target="_blank">Zev Eisenberg</a>, and <a href="http://lazerwalker.com/" target="_blank">Em Lazer-Walker</a>.<br></p>
+            <p>Special thanks to <a href="http://twitter.com/johnsundell" target="_blank">John Sundell</a> for <a href="https://github.com/JohnSundell/Splash" target="_blank">Splash</a> and <a href="http://twitter.com/_inside" target="_blank">Guilherme Rambo</a> for <a href="https://splash.rambo.codes" target="_blank">hosting it online</a>.
+            Splash has been instrumental in syntax highlighting all the code you see here.</p>
+        </div>
+    </body>
 </html>
